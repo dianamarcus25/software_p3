@@ -1,0 +1,10 @@
+
+  .messages {
+    padding: 38% 0;
+    overflow: auto;
+    flex: auto;
+    border-radius: 4px;
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 5px rgba(8, 7, 16, 0.253);
+  }

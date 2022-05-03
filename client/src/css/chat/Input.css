@@ -1,0 +1,43 @@
+.form {
+    display: flex;
+    border-top: 2px solid #D3D3D3;
+    border-radius: 7px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 10px rgba(8, 7, 16, 0.253);
+
+  }
+ 
+  .input {
+    border: none;
+    border-radius: 0;
+    width: 90%;
+    height: 40px;
+
+  }
+  
+  input:focus, textarea:focus, select:focus{
+    outline: none;
+  }
+  
+  .sendButton {
+    color: #fff !important;
+    text-decoration: none;
+    background: #2979FF;
+    display: inline-block;
+
+    height: 30px;
+    width: 10%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 98%;
+    left: 93%;
+
+    border-radius: 5px;
+    backdrop-filter: blur(7px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 10px rgba(8, 7, 16, 0.253);
+
+  } 
+
+ 
