@@ -113,7 +113,7 @@ class Search extends React.Component {
             <div className="card-body" key={index.role}>Role: {mentorsInfo.role="mentor"}</div>
             
             {/* redirect to joining a room page */}
-            <Link to="/join" className="btn btn-primary">Join a chat</Link>
+            <Link to="/JoinRoom" className="btn btn-primary">Join a chat</Link>
            </div>
             </div>
            </div>
