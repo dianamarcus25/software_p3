@@ -47,14 +47,14 @@ io.on('connect', (socket) => {
       if(error) return callback(error);
 
       socket.join(user.room);
-  
-      //socket.emit(‘sendMessage’) is used to send messages from one user to another user
+      // socket.emit(‘message’)  greets the user whenever a new user joins the chat
       socket.emit('message', { user: 'admin', text: `${user.name}, welcome to room ${user.room}.`});
       socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined!` });
       io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
        callback();
     });
   
+    //socket.emit(‘sendMessage’) is used to send messages from one user to another user
     socket.on('sendMessage', (message, callback) => {
       const user = getUser(socket.id);
       io.to(user.room).emit('message', { user: user.name, text: message });
