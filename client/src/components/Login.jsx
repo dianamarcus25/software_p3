@@ -7,7 +7,6 @@ import {useNavigate} from 'react-router-dom'
   const Login = () =>{
     
     const navigate = useNavigate()
-
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('');
@@ -19,14 +18,11 @@ import {useNavigate} from 'react-router-dom'
         navigate('/login');
       }
     }, [navigate])
-  
   const loginHandle = async(event) =>{
     event.preventDefault();
-  
     const config ={
       headers: {'Content-Type': 'application/json'},
   }
-  
   try {
     //fetch data from backend and compare the email addres and the password stored in the database
     const {data} = await axios.post("/api/users/login", {email, password}, config)
@@ -39,16 +35,13 @@ import {useNavigate} from 'react-router-dom'
   } catch (err) {
     setError(error, "invalid credentials");
   }
-  
-  }
-
+}
       return (
 <body className="body">
 <main className="form-signin">
   <form className='login-form' onSubmit={loginHandle}>
     <h3 className="h1 mb-2 fw-normal">Path</h3>
     <h5 className="h6 mb fw-normal">Account login</h5>
-
 {/* email address input*/}
   <div className="form-group">
     <label htmlFor="inputEmail">Email address</label>
@@ -62,7 +55,6 @@ import {useNavigate} from 'react-router-dom'
     />
     <small id="email" className="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
-
   {/* password input*/}
   <div className="form-group">
     <label htmlFor="inputPassword">Password</label>
@@ -80,14 +72,12 @@ import {useNavigate} from 'react-router-dom'
     {/* redirects to register page */}
       Not registered? <Link to='/register'> Create an account.</Link>
      </span>
-
   <div className="login-button">
   <button type="submit" value="Login" className="btn btn-primary">Login</button>
   </div>
   </form>
   </main>
   </body> 
-
     );
 }
     

@@ -5,7 +5,6 @@ import '../css/search.css'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-
 class Search extends React.Component {
   constructor(props) {
     super(props)
@@ -22,11 +21,8 @@ class Search extends React.Component {
     this.setState({
       query: value
     });
-
     this.listMentors(value);
-
   };
-
 
   listMentors = query => {
     //fetch data from database of registered users and select only the 
@@ -38,7 +34,6 @@ class Search extends React.Component {
           lastname: object.lastname,
           role: object.role="mentor",
           }));
-
           this.setState({ mentorsInfo });
        })
     };
@@ -52,7 +47,6 @@ class Search extends React.Component {
 {/* navigation bars */}
 <SideNavbar/>
 <TopNavbar/>
-
 
   <div className="container-search">
 	<div className="row" id="search">

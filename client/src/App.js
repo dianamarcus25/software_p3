@@ -7,7 +7,6 @@ Route} from 'react-router-dom';
 //ROUTING
 import PrivateRoute from './components/routing/PrivateRoute';
 
-
 //PAGES
 import Login from "./components/Login"
 import Register from "./components/Register.jsx"

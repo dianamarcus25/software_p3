@@ -9,13 +9,11 @@ const JoinRoom = () => {
     const [name, setName] = useState('');
     const [room, setRoom] = useState('');
 
-
     return (
         <>
 {/* navigation bars */}
         <TopNavbar/>
         <SideNavbar/>
-
         <div className="joinOuterContainer">
             <div className="joinInnerContainer">
                  <h1 className="heading">Join a room with a mentor</h1>
@@ -27,9 +25,7 @@ const JoinRoom = () => {
            <button className={'button mt-20'} type="submit">Join a room</button>
          </Link>
             </div>
- 
         </div>
-
         </>
      )
 }

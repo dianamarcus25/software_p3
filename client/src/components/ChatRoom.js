@@ -31,12 +31,9 @@ const ChatRoom = () => {
 
 	const ENDPOINT = "http://localhost:3000/";
 
-
   useEffect(() => {  
     const { name, room } = queryString.parse(location.search);
-
     socket = io(ENDPOINT);
-
     setRoom(room);
     setName(name)
 
@@ -52,17 +49,14 @@ const ChatRoom = () => {
 		socket.on("message", message => {
 			setMessages(messages => [...messages, message]);
 		});
-
 		socket.on("roomData", ({ users }) => {
 			setUsers(users);
 		});
 	}, []);
 
-	//send message function
-
+	//send message 
 	const sendMessage = event => {
 		event.preventDefault();
-
 		//emitting the messagees users send on the screen using.
 		if (message) {
 			socket.emit("sendMessage", message);
@@ -82,7 +76,6 @@ const ChatRoom = () => {
 		{/* Navigation bars */}
 		<TopNavbar/>
 		<SideNavbar/>
-	
     <div className="outerContainer">
       <div className="container-chat">
 
@@ -95,11 +88,8 @@ const ChatRoom = () => {
 		  {/* call the input fields function */}
           <InputFields message={message} setMessage={setMessage} sendMessage={sendMessage} />
       </div>
-
       <TextContainer users={users}/>
-    </div>
-
-	</>
+    </div> </>
 	);
 };
 

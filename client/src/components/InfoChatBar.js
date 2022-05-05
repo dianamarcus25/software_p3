@@ -13,7 +13,6 @@ const InfoChatBar = ({room}) => (
             <h3>{room}</h3>
         </div>
         <div className="rightInnerContainer">
-
             {/* if user ends the chat using the "X" icon then redirect to the join page*/}
             <Link to="/"><img src={closeIcon} alt="close" /></Link>
         </div>

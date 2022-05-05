@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import '../css/register.css'
 import { useNavigate } from 'react-router-dom';
 
-
 const Register =() =>{
   const navigate = useNavigate()
 
@@ -24,13 +23,10 @@ const Register =() =>{
 
 const registerHandle = async(event) =>{
   event.preventDefault();
-
   const config ={
     headers: {'Content-Type': 'application/json'},
 }
-
 try {
-  
   const {data} = await axios.post("/api/users/register", 
   {firstname, 
     lastname, 
@@ -52,16 +48,12 @@ try {
     setError("")
   }, 5000)
 }
-
 }
 
   return (
-
 <body className="body" >
 <main className="form-register">
-
 <form className='register-form' onSubmit={registerHandle}>
-
       <h3 className="h1 mb-2 fw-normal">Path</h3>
     <h5 className="h6 mb fw-normal">Create an account and connect with a mentor or begin mentoring</h5>
     {error && <span className="error-mesg">{error}</span>}
@@ -106,7 +98,6 @@ try {
     />
     <small id="email" className="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
-
   {/* password input*/}
   <div className="form-group">
     <label htmlFor="password">Password</label>
@@ -120,7 +111,6 @@ try {
     />
     <small id="passwordHelp" className="form-text text-muted">Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces.</small>
   </div>
-
   <label htmlFor="role">Choose to register as a mentor or mentee</label>
   <span>
     {/* select the role: mentee/mentor */}
@@ -147,14 +137,10 @@ try {
 {/* register the user */}
   <button className="btn btn-primary" type='submit'>Register</button> 
   </div>
-
   </form>
   </main> 
-  </body>
-
-
+</body>
   )
 }
-
 
 export default Register;

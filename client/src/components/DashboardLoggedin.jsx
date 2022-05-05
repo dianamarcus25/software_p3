@@ -9,13 +9,10 @@ const DashboardLoggedin= ()=>{
 		{/* Navigation bars */}
 <TopNavbar/>
 <SideNavbar/>
-
-                  
                <div className="row justify-content-center">
                        <div className="col-md-6"> 
                        <div className="my-5"> 
-                          
-                               
+                               {/*  onboarding information*/}
 <p> <strong>How this works:</strong> </p>
 <p> We run an open mentoring network that connects high school female students with women from an array of industries for free career support 
 and mentoring to aid in the career development of women from a young age. When you register you are asked to choose how you would like to 
@@ -30,11 +27,9 @@ practice guidance on safeguarding to create this safeguarding policy and includi
 <p> -Mentors must have an active secondary school email address and without this email address they cannot register on the Platform as they need to be verified; </p>
 <p> -Before fully registering, mentors must complete an onboarding process on the Platform which includes training on safeguarding responsibilities and reporting procedures;</p>
 <p> -Any mentee or mentor who does not comply with out Terms and Conditions, will be suspended. Relevant authorities will be contacted if required by law. </p>   
-                            
-                            </div> 
-                         </div>
-                    </div>
-             
+                    </div> 
+                 </div>
+            </div>
         </>
     )
 }
