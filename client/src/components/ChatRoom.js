@@ -3,19 +3,24 @@ import queryString from "query-string";
 import io from "socket.io-client";
 
 import TextContainer from './TextContainer.js'
-import InfoBar from './InfoBar.js'
-import Input from './Input.js'
+import InfoChatBar from './InfoChatBar.js'
+import InputFields from './InputFields.js'
 import Messages from './Messages.js'
+
 import { useLocation } from "react-router";
 import { Navigate } from "react-router";
 
-import "../css/chat/Chat.css";
+import "../css/chat/ChatRoom.css";
 import TopNavbar from "../header/TopNavbar.jsx";
 import SideNavbar from "../header/SideNavbar.jsx";
 
 let socket;
+// The function is a connection point for the client and server 
+// and it handles all the incoming messages from the different 
+// users that are connected
+// enables the chat in real-time
 
-const Chat = () => {
+const ChatRoom = () => {
 	const [name, setName] = useState("");
 	const [room, setRoom] = useState("");
 	const [users, setUsers] = useState([]);
@@ -24,8 +29,8 @@ const Chat = () => {
 	const [flag, setFlag]=useState(0);
     const location = useLocation()
 
-	// const ENDPOINT = "http://localhost:3000/";
-	const ENDPOINT = "https://software-fp.herokuapp.com/";
+	const ENDPOINT = "http://localhost:3000/";
+
 
   useEffect(() => {  
     const { name, room } = queryString.parse(location.search);
@@ -58,12 +63,14 @@ const Chat = () => {
 	const sendMessage = event => {
 		event.preventDefault();
 
+		//emitting the messagees users send on the screen using.
 		if (message) {
 			socket.emit("sendMessage", message);
 			setMessage("");
 		}
 	};
 
+	// if there is an error or something went wrong redirect the user to join page
 	if (flag){
 		return (
 		  <Navigate to="/join" />
@@ -72,15 +79,23 @@ const Chat = () => {
 
 	return (
 		<>
+		{/* Navigation bars */}
 		<TopNavbar/>
 		<SideNavbar/>
 	
     <div className="outerContainer">
       <div className="container-chat">
-          <InfoBar room={room} />
+
+		  {/* call the information chat bar function */}
+          <InfoChatBar room={room} />
+
+		  {/* call the messages function */}
           <Messages messages={messages} name={name} />
-          <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
+
+		  {/* call the input fields function */}
+          <InputFields message={message} setMessage={setMessage} sendMessage={sendMessage} />
       </div>
+
       <TextContainer users={users}/>
     </div>
 
@@ -88,4 +103,4 @@ const Chat = () => {
 	);
 };
 
-export default Chat;
+export default ChatRoom;

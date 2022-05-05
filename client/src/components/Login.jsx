@@ -5,6 +5,7 @@ import '../css/login.css'
 import {useNavigate} from 'react-router-dom'
 
   const Login = () =>{
+    
     const navigate = useNavigate()
 
     const [email, setEmail] = useState('')
@@ -12,6 +13,8 @@ import {useNavigate} from 'react-router-dom'
     const [error, setError] = useState('');
   
     useEffect(()=>{
+
+      //if there is no token found for the user session then navigate the user to the login page
       if(localStorage.getItem('authToken')) {
         navigate('/login');
       }
@@ -25,22 +28,21 @@ import {useNavigate} from 'react-router-dom'
   }
   
   try {
+    //fetch data from backend and compare the email addres and the password stored in the database
     const {data} = await axios.post("/api/users/login", {email, password}, config)
+    //create token for the user session
     localStorage.setItem("authToken", data.token);
   
+    //once logged in redirect the user to the dashboard
     navigate("/DashboardLoggedin")
+
   } catch (err) {
     setError(error, "invalid credentials");
-    // setTimeout(()=>{
-    //   setError("invalid credentials")
-    // }, 5000)
   }
   
   }
 
       return (
-   
-
 <body className="body">
 <main className="form-signin">
   <form className='login-form' onSubmit={loginHandle}>
@@ -75,19 +77,16 @@ import {useNavigate} from 'react-router-dom'
   </div>
 
   <span className='account-not-created'>
+    {/* redirects to register page */}
       Not registered? <Link to='/register'> Create an account.</Link>
      </span>
 
   <div className="login-button">
   <button type="submit" value="Login" className="btn btn-primary">Login</button>
   </div>
-
-
   </form>
   </main>
   </body> 
-
-       
 
     );
 }

@@ -1,7 +1,9 @@
 const User = require('../models/userSchema');
 const ErrorResponses = require("../utils/errorResponses")
 
-     exports.registerUser = async(req,res,next) => {
+//register users
+    exports.registerUser = async(req,res,next) => {
+        
     const {firstname, lastname, email, password, role } = req.body;
 
     try {
@@ -21,8 +23,9 @@ const ErrorResponses = require("../utils/errorResponses")
     }
 };
 
-
+// listing all users
 exports.allUsers = async (req, res, next) => {
+
     User.find({  })
     .then((data) => {
         console.log('Data: ', data);
@@ -33,7 +36,8 @@ exports.allUsers = async (req, res, next) => {
     });
   };
 
-     exports.loginUser = async(req,res,next) => {
+// login user
+  exports.loginUser = async(req,res,next) => {
 
     const {email, password} =req.body;
 

@@ -24,7 +24,7 @@ export const Sidebar_elements = [
     {
         title: "Chat Room",
         icon: <MdIcons.MdOutlineForum />,
-        page: "/join",
+        page: "/JoinRoom",
         class_name:'nav-text'
     },
     {

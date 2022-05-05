@@ -5,8 +5,6 @@ import '../css/register.css'
 import { useNavigate } from 'react-router-dom';
 
 
-// function Register() {
-
 const Register =() =>{
   const navigate = useNavigate()
 
@@ -32,6 +30,7 @@ const registerHandle = async(event) =>{
 }
 
 try {
+  
   const {data} = await axios.post("/api/users/register", 
   {firstname, 
     lastname, 
@@ -40,9 +39,13 @@ try {
     role}, 
     config);
 
+    //create a token for the user
   localStorage.setItem("authToken", data.token);
+
+  //if registered succesfully redirect to the dashboard
   navigate("/DashboardLoggedin")
 
+  //else send error
 } catch (err) {
   setError(error.response.data.err);
   setTimeout(()=>{
@@ -57,10 +60,8 @@ try {
 <body className="body" >
 <main className="form-register">
 
-{/* <form className='register-form' onSubmit={registerUser}> */}
 <form className='register-form' onSubmit={registerHandle}>
 
-			{/* <form className='register-form' onSubmit={registerUser}> */}
       <h3 className="h1 mb-2 fw-normal">Path</h3>
     <h5 className="h6 mb fw-normal">Create an account and connect with a mentor or begin mentoring</h5>
     {error && <span className="error-mesg">{error}</span>}
@@ -122,6 +123,7 @@ try {
 
   <label htmlFor="role">Choose to register as a mentor or mentee</label>
   <span>
+    {/* select the role: mentee/mentor */}
       <select type="boolean" 
       className="role-control" 
       placeholder="role"
@@ -137,13 +139,14 @@ try {
       </span>
 
       <span className='account-created'>
+        {/* redirect to login if the user is already registered */}
         Do you already have an account? <Link to='/login'> Login here</Link>
      </span>
 
      <div className='register-button' >
-  <button className="btn btn-primary" 
-  type='submit'
-  >Register</button> </div>
+{/* register the user */}
+  <button className="btn btn-primary" type='submit'>Register</button> 
+  </div>
 
   </form>
   </main> 

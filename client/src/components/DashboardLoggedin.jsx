@@ -6,9 +6,9 @@ const DashboardLoggedin= ()=>{
 
     return (
         <>
-
+		{/* Navigation bars */}
 <TopNavbar/>
-      <SideNavbar/>
+<SideNavbar/>
 
                   
                <div className="row justify-content-center">

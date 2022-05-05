@@ -4,7 +4,6 @@ const express = require('express');
 const socketio = require('socket.io');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const path = require('path');
 
 const app = express();
 
@@ -17,7 +16,7 @@ dotenv.config({path : '.env'})
 // connection to database
 require('./database/db.js');
 
-// Require the Model created
+// Require the user Model created
 const Users = require('./models/userSchema');
 
 //////// Middleware/////////
@@ -28,6 +27,7 @@ app.use(express.urlencoded({extended : false}));
 
 app.use('/api/users', userRoutes); 
 app.use('/api/private', require('./routes/private')); 
+
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./controllers/usersChat');
 
 const router = require('./routes/chatRouter.js');
@@ -38,7 +38,10 @@ const io = socketio(server);
 app.use(cors());
 app.use(router);
 
-//socket connection 
+
+// socket connection 
+
+// io.on('connect') is used for incoming socket connections.
 io.on('connect', (socket) => {
     socket.on('join', ({ name, room }, callback) => {
       const { error, user } = addUser({ id: socket.id, name, room });
@@ -47,6 +50,7 @@ io.on('connect', (socket) => {
   
       socket.join(user.room);
   
+      //socket.emit(‘sendMessage’) is used to send messages from one user to another user
       socket.emit('message', { user: 'admin', text: `${user.name}, welcome to room ${user.room}.`});
       socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined!` });
   
@@ -63,6 +67,7 @@ io.on('connect', (socket) => {
     //    callback();
     });
   
+    // socket.on('disconnect') is called when a user quits the chat room.
     socket.on('disconnect', () => {
       const user = removeUser(socket.id);
   
@@ -72,7 +77,6 @@ io.on('connect', (socket) => {
       }
     })
   });
-  
 
 
 
@@ -81,22 +85,6 @@ app.use(errorHandler);
 
 // Run the server
 const port= 5000 || process.env.PORT;
-
-//-------deployment
-const __dirname1 = path.resolve();
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/client/build")));
-
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
-  );
-} else {
-  app.get("/", (req, res) => {
-    res.send("API is running..");
-  });
-}
-//------deployment
 
 server.listen(port, () => {
 console.log(`Server is running on port: ${port}`);

@@ -10,6 +10,7 @@ class Search extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      //create an array for the users 
       mentorsInfo: []
     };  
   }
@@ -28,12 +29,14 @@ class Search extends React.Component {
 
 
   listMentors = query => {
+    //fetch data from database of registered users and select only the 
+    //first name, last name and the users with the role of "mentor"
       axios.get('/api/users/register')
        .then(res =>{
-        const mentorsInfo = (res.data || []).map(obj => ({ 
-          firstname: obj.firstname,
-          lastname: obj.lastname,
-          role: obj.role="mentor",
+        const mentorsInfo = (res.data || []).map(object => ({ 
+          firstname: object.firstname,
+          lastname: object.lastname,
+          role: object.role="mentor",
           }));
 
           this.setState({ mentorsInfo });
@@ -46,6 +49,7 @@ class Search extends React.Component {
   render() {
     return(
 <>
+{/* navigation bars */}
 <SideNavbar/>
 <TopNavbar/>
 
@@ -89,6 +93,8 @@ class Search extends React.Component {
 
 <div className='row'>
 <ul>
+
+{/* mapping the information retreived to the client side */}
     {this.state.mentorsInfo.map(function(mentorsInfo, index){
       return (
         <span> 
@@ -96,14 +102,17 @@ class Search extends React.Component {
               <div className='container-mentors'>
              <div className='card-mentors'> 
 
+             {/* list first name and last name */}
             <div className="card-header" key={[index.firstname,index.lastname]}>Name: {mentorsInfo.firstname} {mentorsInfo.lastname}</div>
 
             <div className="card-body"> Other information they will 
             have on their profile such as job title, 
             industry and university attended</div>
 
+            {/* list the role */}
             <div className="card-body" key={index.role}>Role: {mentorsInfo.role="mentor"}</div>
-
+            
+            {/* redirect to joining a room page */}
             <Link to="/join" className="btn btn-primary">Join a chat</Link>
            </div>
             </div>
